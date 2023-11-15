@@ -21,6 +21,7 @@ public class ConsultaServices {
 	private ConsultaRepository repository;
 	
 	
+	
 	public List<Consulta> findAll(){
 		return repository.findAll();
 	}
