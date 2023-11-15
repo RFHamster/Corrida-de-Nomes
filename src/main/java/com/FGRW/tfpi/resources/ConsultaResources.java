@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.FGRW.tfpi.entities.Consulta;
+import com.FGRW.tfpi.entities.Data;
 import com.FGRW.tfpi.services.ConsultaServices;
 
 @RestController
@@ -28,6 +30,16 @@ public class ConsultaResources {
 	public ResponseEntity<List<Consulta>> findAll() {
 		List<Consulta> list = service.findAll();
 		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/data")
+	public ResponseEntity<List<Data>> acharData(
+			@RequestParam(required = true, defaultValue = "") String dataInicial,
+			@RequestParam(required = true, defaultValue = "") String dataFinal,
+			@RequestParam(required = false, defaultValue = "BR") String localidade,
+			@RequestParam(required = false, defaultValue = "") String sexo)  {
+		List<Data> data = service.makeData(dataInicial, dataFinal, localidade,sexo);
+		return ResponseEntity.ok().body(data);
 	}
 
 	@GetMapping(value = "/{id}")

@@ -5,12 +5,12 @@ import java.util.Objects;
 public class Nome {
 	private String nome;
 	private String frequencia;
-	private Integer ranking;
+	private String ranking;
 	
 	public Nome() {
 	}
 	
-	public Nome(String nome, String frequencia, Integer ranking) {
+	public Nome(String nome, String frequencia, String ranking) {
 		super();
 		this.nome = nome;
 		this.frequencia = frequencia;
@@ -29,10 +29,10 @@ public class Nome {
 	public void setFrequencia(String frequencia) {
 		this.frequencia = frequencia;
 	}
-	public Integer getRanking() {
+	public String getRanking() {
 		return ranking;
 	}
-	public void setRanking(Integer ranking) {
+	public void setRanking(String ranking) {
 		this.ranking = ranking;
 	}
 	@Override

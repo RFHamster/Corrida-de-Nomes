@@ -22,7 +22,7 @@ public class EstadosServices {
 	private EstadosRepository repository;
 	
 	public void consumirAPIEArmazenarNoBanco() {
-        String apiUrl = "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome";
+		String apiUrl = "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -31,6 +31,8 @@ public class EstadosServices {
         for (Estados estado : estados) {
         	repository.save(estado);
         }
+        Estados est = new Estados("BR", "0", "Brasil");
+        repository.save(est);
     }
 	
 	public List<Estados> findAll(){
@@ -40,6 +42,11 @@ public class EstadosServices {
 	public Estados findById(String id) {
 		Optional<Estados> obj = repository.findById(id);
 		return obj.get();
+	}
+	
+	public String estadoNumber(String id) {
+		Optional<Estados> estado = repository.findById(id);
+		return estado.get().getId();
 	}
 	
 	public Estados insert(Estados obj) {

@@ -1,17 +1,17 @@
 package com.FGRW.tfpi.entities;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Ranking {
 	private String localidade;
 	private String sexo;
-	private ArrayList<Nome> res;
+	private List<Nome> res;
 	
 	public Ranking() {
 		super();
 	}
-	public Ranking(String localidade, String sexo, ArrayList<Nome> res) {
+	public Ranking(String localidade, String sexo, List<Nome> res) {
 		super();
 		this.localidade = localidade;
 		this.sexo = sexo;
@@ -29,10 +29,10 @@ public class Ranking {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public ArrayList<Nome> getRes() {
+	public List<Nome> getRes() {
 		return res;
 	}
-	public void setRes(ArrayList<Nome> res) {
+	public void setRes(List<Nome> res) {
 		this.res = res;
 	}
 	public void addRes(Nome res) {
