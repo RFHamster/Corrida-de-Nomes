@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulário de Seleção de Décadas, Estados e Sexo</title>
+</head>
+<body>
+  <h1>Formulário de Seleção de Décadas, Estados e Sexo</h1> 
+  
+  <form id="decades-states-gender-form">
+    <label for="decade-start">Década Inicial:</label>
+    <select id="decade-start" name="decade-start">  
+    </select>
+    
+    <label for="decade-end">Década Final:</label>
+    <select id="decade-end" name="decade-end">       
+    </select>
+    
+    <label for="local">Localidade:</label>
+    
+    <select id="local" name="local">
+      <option value="BR">Brasil</option>
+      <option value="AC">Acre</option>
+      <option value="AL">Alagoas</option>
+      <option value="AP">Amapá</option>
+      <option value="AM">Amazonas</option>
+      <option value="BA">Bahia</option>
+      <option value="CE">Ceará</option>
+      <option value="DF">Distrito Federal</option>
+      <option value="ES">Espírito Santo</option>
+      <option value="GO">Goiás</option>
+      <option value="MA">Maranhão</option>
+      <option value="MT">Mato Grosso</option>
+      <option value="MS">Mato Grosso do Sul</option>
+      <option value="MG">Minas Gerais</option>
+      <option value="PA">Pará</option>
+      <option value="PB">Paraíba</option>
+      <option value="PR">Paraná</option>
+      <option value="PE">Pernambuco</option>
+      <option value="PI">Piauí</option>
+      <option value="RJ">Rio de Janeiro</option>
+      <option value="RN">Rio Grande do Norte</option>
+      <option value="RS">Rio Grande do Sul</option>
+      <option value="RO">Rondônia</option>
+      <option value="RR">Roraima</option>
+      <option value="SC">Santa Catarina</option>
+      <option value="SP">São Paulo</option>
+      <option value="SE">Sergipe</option>
+      <option value="TO">Tocantins</option>
+    </select>
+    
+    <label for="gender">Sexo:</label>
+    <select id="gender" name="gender">
+      <option value="">Selecione um sexo</option>
+      <option value="M">Masculino</option>
+      <option value="F">Feminino</option>
+      <option value="A">Ambos</option>
+    </select>
+    
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    document.getElementById('decades-states-gender-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+      
+          var decadeStart = document.getElementById('decade-start').value;
+          var decadeEnd = document.getElementById('decade-end').value;
+          var state = document.getElementById('local').value;
+          var gender = document.getElementById('gender').value;
+          
+          console.log(decadeStart);
+          console.log(decadeEnd);
+          console.log(state);
+          console.log(gender);
+        
+          var url = 'http://localhost:8080/consulta/data?dataInicial=' + decadeStart + '&dataFinal=' + decadeEnd + '&localidade=' + state + '&sexo=' + gender;
+        	
+          console.log(url);
+          fetch(url)
+            .then(function(response) {
+              if (!response.ok) {
+                throw new Error('Erro na requisição: ' + response.status);
+              }
+              return response.json();
+            })
+            .then(function(data) {
+              // Faça algo com os dados retornados pela API
+              console.log(data);
+            })
+            .catch(function(error) {
+              // Trate os erros
+              console.error('Erro na requisição:', error);
+            });
+        });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtém a referência do elemento select
+        var selectElementStart = document.getElementById('decade-start');
+        var selectElementEnd = document.getElementById('decade-end');
+  
+        // Adiciona as opções ao elemento select usando um loop for
+        for (var decade = 1930; decade <= 2010; decade += 10) {
+            var optionStart = document.createElement('option');
+            optionStart.value = decade;
+            optionStart.text = decade;
+            selectElementStart.add(optionStart);
+  
+            var optionEnd = document.createElement('option');
+            optionEnd.value = decade;
+            optionEnd.text = decade;
+            selectElementEnd.add(optionEnd);
+        }
+
+        
+        });
+    
+  </script>
+</body>
+
+</html>

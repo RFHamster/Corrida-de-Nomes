@@ -28,7 +28,7 @@ public class ConsultaServices {
 	@Autowired
 	EstadosServices estados;
 	
-	public List<Data> makeData(String dataInicial, String dataFinal, String localidade, String sexo) {
+	public List<Data> makeData(String session, String dataInicial, String dataFinal, String localidade, String sexo) {
 		List<Data> result = new ArrayList<Data>();
 		String apiUrl = "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?";
 		apiUrl += "localidade=" + estados.estadoNumber(localidade);
@@ -59,6 +59,8 @@ public class ConsultaServices {
 	            }
 	        }
 		}
+		Consulta consulta = new Consulta(null, session, dataInicial, dataFinal, sexo, localidade);
+		insert(consulta);
 		return result;
 	}
 	

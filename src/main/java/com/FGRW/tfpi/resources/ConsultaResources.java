@@ -34,11 +34,12 @@ public class ConsultaResources {
 	
 	@GetMapping(value = "/data")
 	public ResponseEntity<List<Data>> acharData(
+			@RequestParam(required = false, defaultValue = "") String session,
 			@RequestParam(required = true, defaultValue = "") String dataInicial,
 			@RequestParam(required = true, defaultValue = "") String dataFinal,
 			@RequestParam(required = false, defaultValue = "BR") String localidade,
 			@RequestParam(required = false, defaultValue = "") String sexo)  {
-		List<Data> data = service.makeData(dataInicial, dataFinal, localidade,sexo);
+		List<Data> data = service.makeData(session, dataInicial, dataFinal, localidade,sexo);
 		return ResponseEntity.ok().body(data);
 	}
 
