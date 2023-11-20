@@ -2,62 +2,100 @@
 <html>
 <head>
   <title>Formulário de Seleção de Décadas, Estados e Sexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        display: flex;
+        width: 100%;
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        background-color: #f2f2f2;
+    }
+
+    .aside {
+        width: 300px;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+    }
+  </style>
 </head>
 <body>
-  <h1>Formulário de Seleção de Décadas, Estados e Sexo</h1> 
-  
-  <form id="decades-states-gender-form">
-    <label for="decade-start">Década Inicial:</label>
-    <select id="decade-start" name="decade-start">  
-    </select>
+  <div class="container">
+    <div class="main-content">
+      <h1>Formulário de Seleção de Décadas, Estados e Sexo</h1> 
+      
+      <form id="decades-states-gender-form">
+        <label for="decade-start">Década Inicial:</label>
+        <select id="decade-start" name="decade-start">  
+        </select>
+        
+        <label for="decade-end">Década Final:</label>
+        <select id="decade-end" name="decade-end">       
+        </select>
+        
+        <label for="local">Localidade:</label>
+        
+        <select id="local" name="local">
+          <option value="BR">Brasil</option>
+          <option value="AC">Acre</option>
+          <option value="AL">Alagoas</option>
+          <option value="AP">Amapá</option>
+          <option value="AM">Amazonas</option>
+          <option value="BA">Bahia</option>
+          <option value="CE">Ceará</option>
+          <option value="DF">Distrito Federal</option>
+          <option value="ES">Espírito Santo</option>
+          <option value="GO">Goiás</option>
+          <option value="MA">Maranhão</option>
+          <option value="MT">Mato Grosso</option>
+          <option value="MS">Mato Grosso do Sul</option>
+          <option value="MG">Minas Gerais</option>
+          <option value="PA">Pará</option>
+          <option value="PB">Paraíba</option>
+          <option value="PR">Paraná</option>
+          <option value="PE">Pernambuco</option>
+          <option value="PI">Piauí</option>
+          <option value="RJ">Rio de Janeiro</option>
+          <option value="RN">Rio Grande do Norte</option>
+          <option value="RS">Rio Grande do Sul</option>
+          <option value="RO">Rondônia</option>
+          <option value="RR">Roraima</option>
+          <option value="SC">Santa Catarina</option>
+          <option value="SP">São Paulo</option>
+          <option value="SE">Sergipe</option>
+          <option value="TO">Tocantins</option>
+        </select>
+        
+        <label for="gender">Sexo:</label>
+        <select id="gender" name="gender">
+          <option value="">Selecione um sexo</option>
+          <option value="M">Masculino</option>
+          <option value="F">Feminino</option>
+          <option value="A">Ambos</option>
+        </select>
+        
+        <button type="submit">Enviar</button>
+      </form>
+
+      <div id="chart-container"></div>
+    </div>
     
-    <label for="decade-end">Década Final:</label>
-    <select id="decade-end" name="decade-end">       
-    </select>
-    
-    <label for="local">Localidade:</label>
-    
-    <select id="local" name="local">
-      <option value="BR">Brasil</option>
-      <option value="AC">Acre</option>
-      <option value="AL">Alagoas</option>
-      <option value="AP">Amapá</option>
-      <option value="AM">Amazonas</option>
-      <option value="BA">Bahia</option>
-      <option value="CE">Ceará</option>
-      <option value="DF">Distrito Federal</option>
-      <option value="ES">Espírito Santo</option>
-      <option value="GO">Goiás</option>
-      <option value="MA">Maranhão</option>
-      <option value="MT">Mato Grosso</option>
-      <option value="MS">Mato Grosso do Sul</option>
-      <option value="MG">Minas Gerais</option>
-      <option value="PA">Pará</option>
-      <option value="PB">Paraíba</option>
-      <option value="PR">Paraná</option>
-      <option value="PE">Pernambuco</option>
-      <option value="PI">Piauí</option>
-      <option value="RJ">Rio de Janeiro</option>
-      <option value="RN">Rio Grande do Norte</option>
-      <option value="RS">Rio Grande do Sul</option>
-      <option value="RO">Rondônia</option>
-      <option value="RR">Roraima</option>
-      <option value="SC">Santa Catarina</option>
-      <option value="SP">São Paulo</option>
-      <option value="SE">Sergipe</option>
-      <option value="TO">Tocantins</option>
-    </select>
-    
-    <label for="gender">Sexo:</label>
-    <select id="gender" name="gender">
-      <option value="">Selecione um sexo</option>
-      <option value="M">Masculino</option>
-      <option value="F">Feminino</option>
-      <option value="A">Ambos</option>
-    </select>
-    
-    <button type="submit">Enviar</button>
-  </form>
+    <aside class="aside">
+      <div id="consultas-container"></div>
+    </aside>
+  </div>
 
   <script>
     document.getElementById('decades-states-gender-form').addEventListener('submit', function(event) {
@@ -67,15 +105,9 @@
           var decadeEnd = document.getElementById('decade-end').value;
           var state = document.getElementById('local').value;
           var gender = document.getElementById('gender').value;
-          
-          console.log(decadeStart);
-          console.log(decadeEnd);
-          console.log(state);
-          console.log(gender);
         
           var url = 'http://localhost:8080/consulta/data?dataInicial=' + decadeStart + '&dataFinal=' + decadeEnd + '&localidade=' + state + '&sexo=' + gender;
         	
-          console.log(url);
           fetch(url)
             .then(function(response) {
               if (!response.ok) {
@@ -84,36 +116,73 @@
               return response.json();
             })
             .then(function(data) {
-              // Faça algo com os dados retornados pela API
+              carregarConsultas();
               console.log(data);
             })
             .catch(function(error) {
-              // Trate os erros
               console.error('Erro na requisição:', error);
             });
-        });
-    document.addEventListener('DOMContentLoaded', function () {
-        // Obtém a referência do elemento select
-        var selectElementStart = document.getElementById('decade-start');
-        var selectElementEnd = document.getElementById('decade-end');
-  
-        // Adiciona as opções ao elemento select usando um loop for
-        for (var decade = 1930; decade <= 2010; decade += 10) {
-            var optionStart = document.createElement('option');
-            optionStart.value = decade;
-            optionStart.text = decade;
-            selectElementStart.add(optionStart);
-  
-            var optionEnd = document.createElement('option');
-            optionEnd.value = decade;
-            optionEnd.text = decade;
-            selectElementEnd.add(optionEnd);
-        }
+    });
 
-        
-        });
-    
+    function carregarConsultas() {
+      fetch('http://localhost:8080/consulta')
+        .then(response => response.json())
+        .then(data => exibirConsultas(data))
+        .catch(error => console.error('Erro ao carregar consultas:', error));
+    }
+
+    function exibirConsultas(consultas) {
+      const container = document.getElementById('consultas-container');
+      container.innerHTML = '';
+
+      console.log(consultas);
+
+      consultas.forEach(consulta => {
+        const consultaDiv = document.createElement('div');
+        consultaDiv.innerHTML = `
+          <p>Consulta n ${consulta.id}: ${consulta.dataInicial} ${consulta.dataFinal}</p>
+          <button onclick="excluirConsulta(${consulta.id})">Excluir</button>
+        `;
+        container.appendChild(consultaDiv);
+      });
+    }
+
+    function excluirConsulta(consultaId) {
+      fetch(`http://localhost:8080/consulta/${consultaId}`, {
+        method: 'DELETE',
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Erro ao excluir consulta: ${response.status} - ${response.statusText}`);
+          }
+          return null;
+        })
+        .then(() => {
+          carregarConsultas();
+        })
+        .catch(error => console.error(error));
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var selectElementStart = document.getElementById('decade-start');
+      var selectElementEnd = document.getElementById('decade-end');
+
+      for (var decade = 1930; decade <= 2010; decade += 10) {
+        var optionStart = document.createElement('option');
+        optionStart.value = decade;
+        optionStart.text = decade;
+        selectElementStart.add(optionStart);
+
+        var optionEnd = document.createElement('option');
+        optionEnd.value = decade;
+        optionEnd.text = decade;
+        selectElementEnd.add(optionEnd);
+      }
+
+      carregarConsultas();
+    });
   </script>
+
 </body>
 
 </html>
