@@ -1,0 +1,14 @@
+{
+  "name": "f63464033333107e",
+  "main": "f63464033333107e@3097.js",
+  "version": "3097.0.0",
+  "homepage": "https://observablehq.com/d/f63464033333107e",
+  "author": {
+    "name": "wolf loaders",
+    "url": "https://observablehq.com/@wolf-loaders"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
