@@ -6,3 +6,22 @@ Foram padrões de projeto, boas práticas e frameworks no back-end, como o padr�
 
 Cada pacote tem sua função, desde configurar os atributos do projeto, modelar o banco de dados com anotações e controlar o acesso dos dados para uma API Rest com os controllers e services.
 
+## Pagina Inicial do Projeto
+
+![Pag Inicial](https://user-images.githubusercontent.com/71076681/284689887-0a5b5693-3dc1-42d2-b482-b8b3fbf0cbfa.png)
+
+## Gráfico Resultante
+
+Lembre-se que ele é uma forma de corrida, a cada ano do intervalo ele vai aumentando ou diminuindo as barras de forma interativa, então isso é uma captura de um momento dele.
+
+![Grafico](https://user-images.githubusercontent.com/71076681/284690433-be363d5f-e6b6-4c9d-b8f6-83d305e85f46.png)
+
+## Estrutura do Projeto Principal (Back-end)
+
+Esta estrutura não conta o gráfico, caso queria saber mais sobre ele, abra a pasta gráfico do projeto e leia acerca do D3.
+
+![Estrutura](https://user-images.githubusercontent.com/71076681/284690984-5f12f01b-4df8-4ca2-9e22-912d7ee8cbf2.png)
+
+## Exemplo de uma Parte da Estrutura da API com Spring Boot
+
+![EstruturaAPI](https://user-images.githubusercontent.com/71076681/284691495-d7150f0f-abb6-4c75-90cf-fc11015827b4.png)
