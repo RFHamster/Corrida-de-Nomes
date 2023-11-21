@@ -2,32 +2,5 @@
 
 https://observablehq.com/d/f63464033333107e@3097
 
-View this notebook in your browser by running a web server in this folder. For
-example:
-
-~~~sh
-npx http-server
-~~~
-
-Or, use the [Observable Runtime](https://github.com/observablehq/runtime) to
-import this module directly into your application. To npm install:
-
-~~~sh
-npm install @observablehq/runtime@5
-npm install https://api.observablehq.com/d/f63464033333107e@3097.tgz?v=3
-~~~
-
-Then, import your notebook and the runtime as:
-
-~~~js
-import {Runtime, Inspector} from "@observablehq/runtime";
-import define from "f63464033333107e";
-~~~
-
-To log the value of the cell named “foo”:
-
-~~~js
-const runtime = new Runtime();
-const main = runtime.module(define);
-main.value("foo").then(value => console.log(value));
-~~~
+Esse gráfico funciona para mostrar dados de diferentes datas em uma forma de corrida. Desta maneira, nosso código passa um Json com os dados requisitados para a manipulação do gráfico com um POST, e lá é manipulado para entrar nos padrões para ser plotado no gráfico.
+O link acima mostra como o gráfico foi feito e funciona como uma biblioteca para entender o código e como alterar o mesmo para funcionar com a sua realidade.
