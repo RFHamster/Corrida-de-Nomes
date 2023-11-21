@@ -33,13 +33,14 @@ public class ConsultaServices {
 		String apiUrl = "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?";
 		apiUrl += "localidade=" + estados.estadoNumber(localidade);
 		if ("M".equals(sexo.toUpperCase()) || "F".equals(sexo.toUpperCase())) {
-	        apiUrl += "&sexo=" + sexo + "&";
+	        apiUrl += "&sexo=" + sexo;
 	    }
+
 		
 		RestTemplate restTemplate = new RestTemplate();
 		for(int i = Integer.parseInt(dataInicial); i<=Integer.parseInt(dataFinal); i = i + 10) {
 			String date = Integer.toString(i);
-			String apiUrlAtual = apiUrl + "decada=" + Integer.toString(i);
+			String apiUrlAtual = apiUrl + "&decada=" + Integer.toString(i);
 
 			ResponseEntity<Ranking[]> responseEntity = restTemplate.getForEntity(
 		            apiUrlAtual,
@@ -58,6 +59,7 @@ public class ConsultaServices {
 	                result.add(data);
 	            }
 	        }
+			System.out.println(apiUrlAtual);
 		}
 		Consulta consulta = new Consulta(null, session, dataInicial, dataFinal, sexo, localidade);
 		insert(consulta);
